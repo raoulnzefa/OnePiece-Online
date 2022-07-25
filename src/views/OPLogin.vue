@@ -28,15 +28,14 @@
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   name:'OPLogin',
   data() {
     return {
       // 登陆表单的数据绑定对象
       loginForm:{
-        username:'',
-        password:'',
+        username:'admin',
+        password:'123456',
       },
       // 表单的验证规则对象
       loginFormRules:{
@@ -60,19 +59,22 @@ export default {
       // this.resetFields()  看到this 心里过一遍this的指向
     },
     login(){
-      this.$refs.loginFormRef.validate( valid=>{
+      this.$refs.loginFormRef.validate(async valid=>{
         if (!valid) return
-        else{
-          axios.post('https://mock.presstime.cn/mock/62ceb6ea4d5d850057863f9c/example/upload',this.loginForm)
-            .then(res=>{
-              if (res.status==200){
-                this.$router.push('/home')
-              }
-            })
-        }
-        
+        const {data:res } = await this.$http.post('login',this.loginForm) 
+        if(res.meta.status !== 200) return this.$message.error('登录失败')
+        this.$message.success('登录成功')   //这里前面加了return后面的代码就都执行不到了
+        window.sessionStorage.setItem('token',res.data.token)
+        this.$router.push('/home')
+        /* 1.将登录成功之后的token,保存到客户端的sessionStorage中
+        1.1项目中除了登录之外的其他API接口，必须在登录之后才能访问
+        1.2 token只应在当前网站打开期间生效，所以将token保存在sessionStorage中
+        2.通过编程式导航跳转到后台主页，路由地址是 */
+           
+       //     this.$router.push('/home')
+          
       })
-    }
+    }       
   }
 }
 </script>

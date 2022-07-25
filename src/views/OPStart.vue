@@ -4,7 +4,6 @@
     <!-- Header -->
     <el-header>
       <el-menu
-        :default-active="activeIndex2"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
@@ -24,7 +23,7 @@
         <el-menu-item index="2-4-3">竞技技巧</el-menu-item>
       </el-submenu>
     </el-submenu>
-    <el-menu-item index="3" disabled> 充值中心</el-menu-item>
+    <el-menu-item index="3"> 充值中心</el-menu-item>
     <el-menu-item index="4"><a href="https://www.eating.work" target="_blank">合作网站</a></el-menu-item>
        </el-menu>
     </el-header>
