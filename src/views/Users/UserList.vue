@@ -16,11 +16,11 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加成员</el-button>
+          <el-button type="primary" @click="addDialogVisible = true">添加成员</el-button>
         </el-col>
       </el-row>
       <!-- 用户列表区域 -->
-      <el-table :data = "memberList" border stripe> 
+      <el-table :data = "userList" border stripe> 
         <el-table-column type="index"></el-table-column>
         <el-table-column label="姓名" prop="username"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
@@ -28,7 +28,7 @@
         <el-table-column label="角色" prop="role_name"></el-table-column>  
         <el-table-column label="状态" >
           <template slot-scope="scope">  
-            <el-switch
+            <el-switch @change="userStateChanged(scope.row)"
               v-model="scope.row.mg_state" >
             </el-switch>
           </template>   
@@ -56,8 +56,22 @@
       :total="total">
     <!-- 一定注意引号里不要有多余的空格 -->
       </el-pagination>
-
     </el-card>
+
+    <!-- 添加用户的对话框 -->
+    <el-dialog
+      title="提示"
+      :visible.sync="addDialogVisible"
+      width="50%">
+      <!-- 内容主体区 -->
+      <span>这是一段信息</span>
+      <!-- 底部区 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addDialogVisible  = false">确 定</el-button>
+      </span>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -74,30 +88,41 @@ export default {
           //当前每页显示多少条数据
           pagesize:2,
         },
-        memberList:[],
-        total:0
+        userList:[],
+        total:0,
+        // 控制添加对话框的显示与隐藏
+        addDialogVisible:false
+
       }
     },
     created(){
-      this.getMembers()
+      this.getUsers()
     },
     methods: {
-       async getMembers(){
+       async getUsers(){
         const {data: res }= await this.$http.get('users',{params:this.queryInfo})
         if(res.meta.status!=200 ) {return this.$message.error('获取成员列表失败')}
-        this.memberList = res.data.users
+        this.userList = res.data.users
         this.total = res.data.total   
       },
       //监听pagesize改变事件
       handleSizeChange(newSize){
         this.queryInfo.pagesize = newSize;
-        this.getMembers()
+        this.getUsers() 
       },
       // 监听 页码值改变事件
       handleCurrentChange(newPage){
-        console.log(newPage)
         this.queryInfo.pagenum =newPage;
-        this.getMembers()
+        this.getUsers()
+      },
+      // 监听状态开关的改变
+      async userStateChanged(userInfo){
+        const {data:res} = await  this.$http.put(`users/${userInfo.id}/state/${userInfo.state}`)
+        if(res.meta.status!== 200) {
+          userInfo.mg_state  = !userInfo.mg_state
+          return this.$message.error('更新用户状态失败')
+        }
+        this.$message.success('更新用户状态成功')
       }
     },
 }
@@ -147,7 +172,13 @@ export default {
   color:steelblue ;
   font-style: italic;
 }
-.el-pagination{
-  margin-top: 1%;
+.el-pagination{ 
+  margin-top: 3%;
+  font-size: 2em;
+  /deep/span{
+    color: steelblue;
+    font-weight: 800;
+    font-size: 0.5em !important;
+  }
 }
 </style>

@@ -111,7 +111,7 @@ body{
   
 }
 .el-header{
- margin-top:10px;
+ margin-top:1%;
 }
 .el-aside{
   //width: 100%;
@@ -120,27 +120,27 @@ body{
   background-image: url(../assets/luff.jpeg);
   background-repeat: no-repeat;
   background-size:cover;
-  margin-top: 10px;
-  margin-left: 20px;
-  padding-bottom: 20px;
+  margin-top: 1%;
+  margin-left: 2%;
+  padding-bottom: 1%;
   background-position: center;
-  border-radius: 22px;
+  border-radius: 2%;
   border:5px orange solid;
   box-shadow:0 0 10px yellow;
 }
 .main-content{
-  margin-top:10px;
+  margin-top:1%;
   width: 60%;
-  margin-left: 22px;
+  margin-left: 2%;
 }
 .el-main{
   background-image: url(../assets/background.jpeg);
   background-repeat: no-repeat;
   background-size:cover;
-  margin-right: 20px;
+  margin-right:2%;
   background-position: center;
   border:5px orange solid; //中间不能加逗号
-  border-radius: 22px;
+  border-radius: 2%;
   display: flex;
   overflow: hidden;
   box-shadow:0 0 10px yellow;
@@ -148,22 +148,22 @@ body{
 .el-menu-demo{
   display: flex;
   justify-content: space-around;
-  border-radius: 22px;
+  border-radius: 2%;
   opacity: 0.77;
 }
 .el-menu-item{
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 25px;
+  font-size: 1.2em;
   font-weight:888;
 }
 .slot-font{
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 25px;
+  font-size: 1.6em;
   font-weight:888;
 }
 h1{
   margin: 0;
-  margin-top:15px;
+  margin-top:1%;
   color:white;
   text-align: center;
   font-size: 3em;
@@ -189,8 +189,8 @@ h3{
 .buttons{
   display:flex;
   flex-direction: column;
-  height: 320px;
-  width: 200px;
+  height: 60%;
+  width: 25%;
   justify-content: space-around;
   margin-left: 0;
   margin-top:5% ;

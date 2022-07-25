@@ -93,7 +93,7 @@ export default {
   border: 10px skyblue solid;  
   // 合在一起写要注意如上顺序 否则值无效
   background-color: white;
-  border-radius:22px;
+  border-radius:2%;
   z-index: 5;
   background-image: url(../assets/map.jpeg);
   background-repeat: no-repeat;
@@ -143,7 +143,7 @@ h1{
   justify-content: space-around;
 }
 .el-button{
-  font-size: 18px;
+  font-size: 1em;
   font-style: bold;
   font-weight: 888;
   border:2px black solid;
