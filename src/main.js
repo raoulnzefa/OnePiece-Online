@@ -10,6 +10,12 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
 
+// 通过axios请求拦截器添加token, 保证拥有访问数据的权限
+axios.interceptors.request.use(config=>{
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  // 在最后必须return config
+  return config
+})
 Vue.use(VueRouter)
 
 Vue.use(ElementUI)

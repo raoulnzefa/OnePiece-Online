@@ -3,8 +3,8 @@
     <!-- 面包屑导航区 -->
     <el-breadcrumb separator-class="el-icon-caret-right" >
       <el-breadcrumb-item :to="{ path: '/home' }"><span class="nav">首页</span></el-breadcrumb-item>
-      <el-breadcrumb-item><span class="nav">我的团队</span></el-breadcrumb-item>
-      <el-breadcrumb-item><span class="nav">出战成员</span></el-breadcrumb-item>
+      <el-breadcrumb-item><span class="nav">用户管理</span></el-breadcrumb-item>
+      <el-breadcrumb-item><span class="nav">用户列表</span></el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 卡片视图区 -->
     <el-card >
@@ -23,10 +23,10 @@
       <el-table :data = "memberList" border stripe> 
         <el-table-column type="index"></el-table-column>
         <el-table-column label="姓名" prop="username"></el-table-column>
-        <el-table-column label="角色指纹" prop="email"></el-table-column>
-        <el-table-column label="战斗力" prop="mobile"></el-table-column>
+        <el-table-column label="邮箱" prop="email"></el-table-column>
+        <el-table-column label="电话" prop="mobile"></el-table-column>
         <el-table-column label="角色" prop="role_name"></el-table-column>  
-        <el-table-column label="参战状态" >
+        <el-table-column label="状态" >
           <template slot-scope="scope">  
             <el-switch
               v-model="scope.row.mg_state" >
@@ -83,7 +83,7 @@ export default {
     },
     methods: {
        async getMembers(){
-        const {data: res }= await this.$http.get('https://mock.presstime.cn/mock/62d002b6ceb4dc0076ef3260/opo/members',{params:this.queryInfo})
+        const {data: res }= await this.$http.get('users',{params:this.queryInfo})
         if(res.meta.status!=200 ) {return this.$message.error('获取成员列表失败')}
         this.memberList = res.data.users
         this.total = res.data.total   

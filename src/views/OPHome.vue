@@ -31,7 +31,7 @@
                 <span>{{item.authName}}</span>
               </template>
               <!-- 二级菜单 -->
-              <el-menu-item :index="'/home/'+item.path+'/'+subItem.path" v-for="subItem in item.children" :key="subItem.id" style="padding-left:30px">
+              <el-menu-item :index="'/home/'+subItem.path" v-for="subItem in item.children" :key="subItem.id" style="padding-left:30px">
                 <template slot="title">
                 <!-- 图标 -->
                 <i class="el-icon-menu"></i>
@@ -69,14 +69,21 @@ export default {
   },
   methods: {
     logout(){
-      window.sessionStorage.clear()
       this.$router.replace('/start')
+      window.sessionStorage.clear()  
     },
-    getMenuList(){
-      this.$http.get('https://mock.presstime.cn/mock/62d002b6ceb4dc0076ef3260/opo/home-nav')
-      .then(res=>res.data)
-      .then(res=>this.menuList = res.data)
+    // 获取所有的菜单
+    async getMenuList(){
+      const { data:res } = await this.$http.get('menus')
+      if (res.meta.status !=200)return this.$message.error(res.meta.msg)
+      this.menuList = res.data
+      // console.log(res)
     },
+    // getMenuList(){
+    //   this.$http.get('menus')
+    //   .then(res=>res.data)
+    //   .then(res=>this.menuList = res.data)
+    // },
     //点击按钮切换菜单折叠
     toggleCollapse(){
       this.isCollapse = !this.isCollapse  

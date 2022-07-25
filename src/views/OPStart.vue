@@ -10,21 +10,21 @@
         background-color = black
         text-color="white"
         active-text-color="#ffd04b">
-    <el-menu-item index="1">玩家论坛</el-menu-item>
+    <el-menu-item index="1">商城简介</el-menu-item>
     <el-submenu index="2">
-      <template slot="title"><span class="slot-font">玩法与攻略</span></template>
-      <el-menu-item index="2-1">剧情模式</el-menu-item>
-      <el-menu-item index="2-2">自由模式</el-menu-item>
-      <el-menu-item index="2-3">竞技场</el-menu-item>
+      <template slot="title"><span class="slot-font">使用指南</span></template>
+      <el-menu-item index="2-1">注册指南</el-menu-item>
+      <el-menu-item index="2-2">登陆指南</el-menu-item>
+      <el-menu-item index="2-3">反馈问题</el-menu-item>
       <el-submenu index="2-4">
-        <template slot="title"><span class="slot-font">攻略</span></template>
-        <el-menu-item index="2-4-1">剧情攻略</el-menu-item>
-        <el-menu-item index="2-4-2">世界地图</el-menu-item>
-        <el-menu-item index="2-4-3">竞技技巧</el-menu-item>
+        <template slot="title"><span class="slot-font">常见问题</span></template>
+        <el-menu-item index="2-4-1">商场相关</el-menu-item>
+        <el-menu-item index="2-4-2">账号丢失</el-menu-item>
+        <el-menu-item index="2-4-3">无法访问</el-menu-item>
       </el-submenu>
     </el-submenu>
     <el-menu-item index="3"> 充值中心</el-menu-item>
-    <el-menu-item index="4"><a href="https://www.eating.work" target="_blank">合作网站</a></el-menu-item>
+    <el-menu-item index="4"><a href="https://www.eating.work" target="_blank">作者博客</a></el-menu-item>
        </el-menu>
     </el-header>
     <!-- Main content -->
@@ -36,14 +36,14 @@
         <!-- Main content -->
       <el-container class="main-content">
         <el-main>
-          <h2>login to find <br> <span style="color:#409EFF;" >Your</span> <br>
-          <strong>ONEPIECE</strong> !</h2>
+          <h2> <strong>ONEPIECE</strong><br> <span style="color:#409EFF;" >主题 UI</span> <br>
+            商城后台 </h2>
         <!--function buttons  -->
         <div class="buttons">
-          <el-button type="primary" @click="showLogin">登 录 游 戏</el-button>
+          <el-button type="primary" @click="showLogin">登 录 系 统</el-button>
           <el-button type="success">注 册 账 号</el-button>
           <el-button type="warning">配 置 信 息</el-button>
-          <el-button type="danger">删 除 游 戏</el-button>
+          <el-button type="danger">开 发 模 式</el-button>
         </div>
         <img :style={opacity:opacityBox} src="../assets/treasures.png" alt="treasures">
         </el-main>
@@ -176,8 +176,8 @@ h2{
   color:darkolivegreen;
   font-style:italic;
   opacity: 0.88;
-  padding-top: 44px;
-  margin-left: 44px;
+  padding-top: 5%;
+  margin-left: 10%;
   text-shadow: -2px 2px 0 gold, 2px 2px 0 black; 
 }
 h3{

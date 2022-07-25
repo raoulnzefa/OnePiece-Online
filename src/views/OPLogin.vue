@@ -7,7 +7,7 @@
       <img src="../assets/luffy.jpeg" alt="">
     </div>
     <!-- 信息 -->
-    <h1>出发！向着伟大航路的尽头！</h1>
+    <h1>输入账号密码进入后台</h1>
     <!-- form area -->
     <el-form ref="loginFormRef" label-width="0px" class="form" :model="loginForm" :rules="loginFormRules">
       <!-- 用户名 -->
