@@ -1,24 +1,8 @@
 # onepiece-online
+## Introduction of the project
+It's the front-end part of a backstage management system ,made by Alex Liu by using Vue.js and ElementUI while learning them.
 
-## Project setup
-```
-npm install
-```
+## About author
+A student from CQUPT
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Study in the laboratory 1009 in the summer vacation of 2022.
