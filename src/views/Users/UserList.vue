@@ -117,7 +117,7 @@ export default {
       },
       // 监听状态开关的改变
       async userStateChanged(userInfo){
-        const {data:res} = await  this.$http.put(`users/${userInfo.id}/state/${userInfo.state}`)
+        const {data:res} = await  this.$http.put(`users/${userInfo.id}/state/${userInfo.mg_state}`)
         if(res.meta.status!== 200) {
           userInfo.mg_state  = !userInfo.mg_state
           return this.$message.error('更新用户状态失败')
