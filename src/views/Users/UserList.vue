@@ -54,6 +54,7 @@
               type="primary"
               icon="el-icon-edit"
               size="mini"
+              @click="editDialogVisible = true"
             ></el-button>
             <el-button
               type="danger"
@@ -90,7 +91,12 @@
     </el-card>
 
     <!-- 添加用户的对话框 -->
-    <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="50%">
+    <el-dialog
+      title="添加用户"
+      @close="addDialogClosed"
+      :visible.sync="addDialogVisible"
+      width="50%"
+    >
       <!-- 内容主体区 -->
       <el-form
         :model="addForm"
@@ -115,11 +121,11 @@
       <!-- 底部区 -->
       <span slot="footer" class="dialog-footer">
         <el-button @click="addDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addDialogVisible = false"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="addUser">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 修改用户的对话框 -->
+    <el-dialog title="编辑用户" width="30%"> </el-dialog>
   </div>
 </template>
 
@@ -170,6 +176,7 @@ export default {
         username: "",
         password: "",
         email: "",
+        mobile: "",
       },
       // 添加表单的验证规则对象
       addFormRules: {
@@ -258,6 +265,27 @@ export default {
         return this.$message.error("更新用户状态失败");
       }
       this.$message.success("更新用户状态成功");
+    },
+    //监听添加用户对话框关闭事件   注意不要把事件绑在表单身上了 应是对话框
+    addDialogClosed() {
+      this.$refs.addFormRef.resetFields();
+    },
+    // 点击按钮 添加新用户
+    addUser() {
+      this.$refs.addFormRef.validate(async (valid) => {
+        if (!valid) return;
+        // 发起添加用户的网络请求
+        const { data: res } = await this.$http.post("users", this.addForm);
+        // 注意JS中 != 和!==
+        if (res.meta.status !== 201) {
+          this.$message.error("添加用户失败！");
+        }
+        this.$message.success("添加用户成功！");
+        // 隐藏添加用户对话框
+        this.addDialogVisible = false;
+        //重新获取用户列表
+        this.getUsers();
+      });
     },
   },
 };
