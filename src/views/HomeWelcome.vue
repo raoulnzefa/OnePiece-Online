@@ -1,34 +1,32 @@
 <template>
- 
- <div class="welcome" >
-     <h1>Ready to go?</h1>
-</div>
-
+  <div class="welcome">
+    <h1>Ready to go?</h1>
+  </div>
 </template>
 
 <script>
 export default {
-  name:"HomeWelcome"
-}
+  name: "HomeWelcome",
+};
 </script>
 
 <style lang="less" scoped>
-
-.welcome{
-  margin:0;
+.welcome {
+  margin: 0;
   height: 100%;
   width: 100%;
-  border:8px lightyellow solid;
+  border: 8px lightyellow solid;
   border-radius: 15 px;
-  background-image:url('../assets/back.jpeg');
+  background-image: url("../assets/back.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   box-sizing: border-box;
 }
-h1{
+h1 {
   text-align: center;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   font-size: 4em;
   font-style: italic;
   color: whitesmoke;

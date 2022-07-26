@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-  <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
-<script> 
+<script>
 export default {
-  name: 'App',
-}
+  name: "App",
+};
 </script>
 
 <style lang="less" scoped>
-#app{
-  position:absolute;
+#app {
+  position: absolute;
   width: 100%;
   height: 100%;
 }

@@ -105,7 +105,7 @@
           <el-input v-model="addForm.password"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="addForm.username"></el-input>
+          <el-input v-model="addForm.email"></el-input>
         </el-form-item>
         <el-form-item label="手机" prop="mobile">
           <el-input v-model="addForm.mobile"></el-input>
@@ -127,7 +127,31 @@
 export default {
   name: "MembersOn",
   data() {
-    
+    // 验证邮箱的规则
+    let checkEmail = (rule, value, cb) => {
+      // 验证邮箱的正则表达式
+      const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+
+      if (regEmail.test(value)) {
+        // 合法的邮箱
+        return cb();
+      }
+
+      cb(new Error("请输入合法的邮箱"));
+    };
+
+    // 验证手机号的规则
+    let checkMobile = (rule, value, cb) => {
+      // 验证手机号的正则表达式
+      const regMobile =
+        /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+
+      if (regMobile.test(value)) {
+        return cb();
+      }
+
+      cb(new Error("请输入合法的手机号"));
+    };
     return {
       //获取列表参数对象
       queryInfo: {
@@ -149,7 +173,6 @@ export default {
       },
       // 添加表单的验证规则对象
       addFormRules: {
-        
         username: [
           {
             required: true,
@@ -182,11 +205,19 @@ export default {
             message: "请输入邮箱",
             trigger: "blur",
           },
+          {
+            validator: checkEmail,
+            trigger: "blur",
+          },
         ],
         mobile: [
           {
             required: true,
             message: "请输入电话",
+            trigger: "blur",
+          },
+          {
+            validator: checkMobile,
             trigger: "blur",
           },
         ],
