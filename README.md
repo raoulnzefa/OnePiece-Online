@@ -1,6 +1,6 @@
 # onepiece-online
 ## Introduction of the project
-It's the front-end part of a backstage management system ,made by Alex Liu by using Vue.js and ElementUI while learning them.
+It's the front-end part of a backstage management system ,made by Alex Liu using Vue.js and ElementUI while learning them.
 
 ## About author
 A student from CQUPT
