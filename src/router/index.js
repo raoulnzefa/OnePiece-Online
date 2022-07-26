@@ -54,4 +54,5 @@ router.beforeEach((to,from,next)=>{
   if (!tokenStr) return next('/start/login')
   next()
 }) 
+// 默认暴露路由
 export default router

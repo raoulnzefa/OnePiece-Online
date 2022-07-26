@@ -1,57 +1,51 @@
-<template>
-
- 
-    <el-container class="home-container" >
-      <!-- 头部区 -->
-      <el-header style="height:20%">
-        <div class="header-left">
-          <img src="../assets/logo.png" alt="logo">
-          <h1>OnePiece.Online</h1>
-        </div>
-        <el-button round type="primary" @click="logout">exit</el-button>
-      </el-header>
-      <!-- 页面主体区域 -->
-      <el-container> 
-        <!-- 侧边栏 -->
-        <el-aside width="isCollapse? '64px': '200px' ">
-          <div class="toggle-button" @click="toggleCollapse">|||</div>
-          <!-- 侧边栏菜单区域 -->
-          <el-menu unique-opened router
-            class="el-menu-vertical-demo"
-            background-color="transparent"
-            :collapse="isCollapse" :collapse-transition="false"
-            >
-            <!-- 一级菜单 -->
-            <el-submenu :index="item.id +'' " v-for="item in menuList" :key="item.id">
-              <!-- 一级菜单模板区域 -->
+<template> 
+  <el-container class="home-container" >
+    <!-- 头部区 -->
+    <el-header style="height:20%">
+      <div class="header-left">
+        <img src="../assets/logo.png" alt="logo">
+        <h1>OnePiece.Online</h1>
+      </div>
+      <el-button round type="primary" @click="logout">exit</el-button>
+    </el-header>
+    <!-- 页面主体区域 -->
+    <el-container> 
+      <!-- 侧边栏 -->
+      <el-aside width="isCollapse? '64px': '200px' ">
+        <div class="toggle-button" @click="toggleCollapse">|||</div>
+        <!-- 侧边栏菜单区域 -->
+        <el-menu unique-opened router
+          class="el-menu-vertical-demo"
+          background-color="transparent"
+          :collapse="isCollapse" :collapse-transition="false"
+          >
+          <!-- 一级菜单 -->
+          <el-submenu :index="item.id +'' " v-for="item in menuList" :key="item.id">
+            <!-- 一级菜单模板区域 -->
+            <template slot="title">
+              <!-- 图标 -->
+              <i class="el-icon-location"></i>
+              <!-- 文本 -->
+              <span>{{item.authName}}</span>
+            </template>
+            <!-- 二级菜单 -->
+            <el-menu-item :index="'/home/'+subItem.path" v-for="subItem in item.children" :key="subItem.id" style="padding-left:30px">
               <template slot="title">
-                <!-- 图标 -->
-                <i class="el-icon-location"></i>
-                <!-- 文本 -->
-                <span>{{item.authName}}</span>
-              </template>
-              <!-- 二级菜单 -->
-              <el-menu-item :index="'/home/'+subItem.path" v-for="subItem in item.children" :key="subItem.id" style="padding-left:30px">
-                <template slot="title">
-                <!-- 图标 -->
-                <i class="el-icon-menu"></i>
-                <!-- 文本 -->
-                <span>{{subItem.authName}}</span>
-              </template>
-              </el-menu-item>
-          </el-submenu>
-      </el-menu>
-        
-        </el-aside>
-          <!--右侧内容主体  -->     
-        <el-main style="padding:0;overflow:hidden;margin:0">  
-          <router-view></router-view>
-        </el-main>
-      </el-container>
+              <!-- 图标 -->
+              <i class="el-icon-menu"></i>
+              <!-- 文本 -->
+              <span>{{subItem.authName}}</span>
+            </template>
+            </el-menu-item>
+        </el-submenu>
+    </el-menu>     
+      </el-aside>
+        <!--右侧内容主体  -->     
+      <el-main style="padding:0;overflow:hidden;margin:0">  
+        <router-view></router-view>
+      </el-main>
     </el-container>
-
-
-  
+  </el-container> 
 </template>
 
 <script>
@@ -104,6 +98,7 @@ export default {
   align-items: center;
   border:10px red solid;
   border-radius: 10px;
+  padding: 0 2%;
   box-shadow: 0 7px 15px pink;
   background-image:url('../assets/banner.jpeg');
   background-repeat: no-repeat;
@@ -115,8 +110,9 @@ export default {
     font-family:'Courier New', Courier, monospace;
     height: 60%;
     font-style: bold;
-    font-size: 1.5em;
+    font-size: 100%;
     font-weight: 900;
+    line-height: 100%;
   }
 }
 .header-left{

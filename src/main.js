@@ -5,7 +5,9 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios'
+
 axios.defaults.baseURL = 'http://45.63.124.5:8889/api/private/v1/'
+
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
@@ -16,8 +18,8 @@ axios.interceptors.request.use(config=>{
   // 在最后必须return config
   return config
 })
-Vue.use(VueRouter)
 
+Vue.use(VueRouter)
 Vue.use(ElementUI)
 
 new Vue({

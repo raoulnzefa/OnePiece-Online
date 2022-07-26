@@ -20,7 +20,7 @@
         </el-col>
       </el-row>
       <!-- 用户列表区域 -->
-      <el-table :data = "userList" border stripe> 
+    <el-table :data = "userList" border stripe> 
         <el-table-column type="index"></el-table-column>
         <el-table-column label="姓名" prop="username"></el-table-column>
         <el-table-column label="邮箱" prop="email"></el-table-column>
@@ -33,9 +33,9 @@
             </el-switch>
           </template>   
         </el-table-column>  
-        <el-table-column label="操作" width="240px">
+        <el-table-column label="操作" width="220%">
            <template >
-            
+   
             <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
             <el-button type="danger" icon="el-icon-delete"  size="mini"></el-button>
             <el-tooltip effect="dark" content="调整角色" placement="top" :enterable="false">

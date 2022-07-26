@@ -196,6 +196,7 @@ h3{
   margin-top:5% ;
 }
 .el-button{
+  height: 15%;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 1em;
   border: black 1px solid;
