@@ -60,6 +60,7 @@
               type="danger"
               icon="el-icon-delete"
               size="mini"
+              @click="removeUserById(scope.row.id)"
             ></el-button>
             <el-tooltip
               effect="dark"
@@ -261,6 +262,7 @@ export default {
       editDialogVisible: false,
       // 查询到的用户信息
       editForm: {},
+      // 编辑表单的验证规则对象
       editFormRules: {
         email: [
           {
@@ -349,8 +351,8 @@ export default {
       this.editForm = res.data;
       this.editDialogVisible = true;
     },
-    editFormClosed(){
-      this.$refs.editFormRef.resetFields()
+    editFormClosed() {
+      this.$refs.editFormRef.resetFields();
     },
     // 修改用户信息并提交
     editUser() {
@@ -358,7 +360,8 @@ export default {
         if (!valid) return;
         // 发起编辑用户的网络请求
         const { data: res } = await this.$http.put(
-          "users/" + this.editForm.id,{email:this.editForm.email,mobile:this.editForm.mobile}
+          "users/" + this.editForm.id,
+          { email: this.editForm.email, mobile: this.editForm.mobile }
         );
         // 注意JS中 != 和!==
         if (res.meta.status !== 200) {
@@ -367,8 +370,33 @@ export default {
         this.getUsers();
         // 隐藏编辑用户对话框
         this.editDialogVisible = false;
-        this.$message.success("编辑用户成功！"); 
+        this.$message.success("编辑用户成功！");
       });
+    },
+    //根据ID删除对应的用户信息
+    async removeUserById(id) {
+      // 弹框询问
+      const confirmResult = await this.$confirm(
+        "此操作将永久删除该用户信息, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      ).catch((err) => err);
+      console.log(confirmResult);
+
+      // 如果用户确认删除则返回值为字符串 confirm
+      // 如果用户取消了删除 则返回值为字符串 cancel
+      if (confirmResult !== "confirm") {
+        return this.$message.info("已取消删除");
+      }
+      // 发起删除用户请求
+      const { data: res } = await this.$http.delete("users/" + id);
+      if (res.meta.status !== 200) return this.$message.error("删除失败");
+      this.getUsers();
+      this.$message.success("删除成功");
     },
   },
 };
