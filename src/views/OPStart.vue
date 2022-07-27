@@ -178,7 +178,7 @@ h1 {
   margin-top: 1%;
   color: white;
   text-align: center;
-  font-size: 3em;
+  font-size: 2.7em;
   font-weight: 888;
   text-shadow: 0 0 10px pink, 0 0 20px pink, 0 0 30px red, 0 0 40px red;
 }
@@ -193,9 +193,10 @@ h2 {
   text-shadow: -2px 2px 0 gold, 2px 2px 0 black;
 }
 h3 {
+  font-size: 1em;
   font-style: italic;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 1%;
   color: grey;
 }
 .buttons {
