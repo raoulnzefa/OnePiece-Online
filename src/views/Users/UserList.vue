@@ -49,12 +49,12 @@
           </template>
         </el-table-column>
         <el-table-column label="操作" width="220%">
-          <template>
+          <template slot-scope="scope">
             <el-button
               type="primary"
               icon="el-icon-edit"
               size="mini"
-              @click="editDialogVisible = true"
+              @click="showEditDialog(scope.row.id)"
             ></el-button>
             <el-button
               type="danger"
@@ -125,7 +125,35 @@
       </span>
     </el-dialog>
     <!-- 修改用户的对话框 -->
-    <el-dialog title="编辑用户" width="30%"> </el-dialog>
+    <el-dialog
+      title="编辑用户"
+      width="50%"
+      :visible.sync="editDialogVisible"
+      close="editFormClosed"
+    >
+      <!-- 对话框主体内容 -->
+      <el-form
+        :model="editForm"
+        :rules="editFormRules"
+        ref="editFormRef"
+        label-width="15%"
+      >
+        <el-form-item label="用户名">
+          <el-input v-model="editForm.username" disabled></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input v-model="editForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="手机" prop="mobile">
+          <el-input v-model="editForm.mobile"></el-input>
+        </el-form-item>
+      </el-form>
+      <!-- 对话框底部内容 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="editUser">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -229,6 +257,34 @@ export default {
           },
         ],
       },
+      // 控制编辑对话框的显示与修改
+      editDialogVisible: false,
+      // 查询到的用户信息
+      editForm: {},
+      editFormRules: {
+        email: [
+          {
+            required: true,
+            message: "请输入邮箱",
+            trigger: "blur",
+          },
+          {
+            validator: checkEmail,
+            trigger: "blur",
+          },
+        ],
+        mobile: [
+          {
+            required: true,
+            message: "请输入电话",
+            trigger: "blur",
+          },
+          {
+            validator: checkMobile,
+            trigger: "blur",
+          },
+        ],
+      },
     };
   },
   created() {
@@ -285,6 +341,33 @@ export default {
         this.addDialogVisible = false;
         //重新获取用户列表
         this.getUsers();
+      });
+    },
+    async showEditDialog(id) {
+      const { data: res } = await this.$http.get("users/" + id);
+      if (res.meta.status !== 200) return this.$message.error("查询用户失败");
+      this.editForm = res.data;
+      this.editDialogVisible = true;
+    },
+    editFormClosed(){
+      this.$refs.editFormRef.resetFields()
+    },
+    // 修改用户信息并提交
+    editUser() {
+      this.$refs.editFormRef.validate(async (valid) => {
+        if (!valid) return;
+        // 发起编辑用户的网络请求
+        const { data: res } = await this.$http.put(
+          "users/" + this.editForm.id,{email:this.editForm.email,mobile:this.editForm.mobile}
+        );
+        // 注意JS中 != 和!==
+        if (res.meta.status !== 200) {
+          return this.$message.error("编辑用户失败！"); // 失败了不只是调用 要return出去
+        }
+        this.getUsers();
+        // 隐藏编辑用户对话框
+        this.editDialogVisible = false;
+        this.$message.success("编辑用户成功！"); 
       });
     },
   },
